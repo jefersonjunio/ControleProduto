@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.tsuryo.swipeablerv.SwipeLeftRightCallback;
@@ -25,19 +27,45 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
     private List<Produto> produtoList = new ArrayList<>();
     private SwipeableRecyclerView rvProdutos;
 
+    private ImageButton imgBtn_add;
+    private ImageButton imgBtn_ver_mais;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         rvProdutos = findViewById(R.id.rv_listaProdutos);
+        imgBtn_add = findViewById(R.id.imgBtn_add);
+        imgBtn_ver_mais = findViewById(R.id.imgBtn_ver_mais);
 
         carregaLista();
 
         configRecyclerView();
+
+        ouvinteCliques();
+    }
+
+    private void ouvinteCliques() {
+        imgBtn_add.setOnClickListener(view -> {
+            Toast.makeText(this, "Clicou em add", Toast.LENGTH_SHORT).show();
+        });
+        
+        imgBtn_ver_mais.setOnClickListener(view -> {
+
+            PopupMenu popupMenu = new PopupMenu(this, imgBtn_ver_mais);
+            popupMenu.getMenuInflater().inflate(R.menu.menu_toolbar, popupMenu.getMenu());
+
+            popupMenu.setOnMenuItemClickListener(menuItem -> {
+                if(menuItem.getItemId() == R.id.menu_sobre) {
+                    Toast.makeText(this, "Sobre", Toast.LENGTH_SHORT).show();
+                }
+
+                return true;
+            });
+
+            popupMenu.show();
+        });
     }
 
     private void configRecyclerView(){
@@ -107,27 +135,4 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
         Toast.makeText(this, produto.getNome(), Toast.LENGTH_SHORT).show();
     }
 
-    //Metodo referente a invocacao da toolbar criada
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_toolbar, menu);
-        return true;
-    }
-
-    //Metodo referente a acao do item selecionado na toolbar
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int idMenu = item.getItemId();
-
-        if(idMenu == R.id.menu_add) {
-            Toast.makeText(this, "Clicou em add", Toast.LENGTH_SHORT).show();
-        } else if (idMenu == R.id.menu_sobre) {
-            Toast.makeText(this, "Clicou em sobre", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Clicou em nada", Toast.LENGTH_SHORT).show();
-        }
-
-        return true;
-    }
 }
