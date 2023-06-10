@@ -1,4 +1,4 @@
-package devandroid.jeff.controledeprodutos;
+package devandroid.jeff.controledeprodutos.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
+import devandroid.jeff.controledeprodutos.model.Produto;
+import devandroid.jeff.controledeprodutos.R;
 
 public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHolder> {
 

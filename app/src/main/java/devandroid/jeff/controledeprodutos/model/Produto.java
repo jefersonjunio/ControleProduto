@@ -1,10 +1,21 @@
-package devandroid.jeff.controledeprodutos;
+package devandroid.jeff.controledeprodutos.model;
 
-public class Produto {
+import java.io.Serializable;
+
+public class Produto implements Serializable {
 
     private String nome;
     private int estoque;
     private double valor;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
