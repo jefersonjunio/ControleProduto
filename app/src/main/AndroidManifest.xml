@@ -12,6 +12,19 @@
         android:theme="@style/Theme.ControleDeProdutos"
         tools:targetApi="31">
         <activity
+            android:name=".autenticacao.RecuperarContaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Splash.Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".autenticacao.CriarContaActivity"
             android:exported="false" />
         <activity

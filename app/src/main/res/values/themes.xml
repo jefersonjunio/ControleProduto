@@ -22,4 +22,9 @@
 
     </style>
 
+    <style name="Theme.Splash.Activity" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">#FFFFFF</item>
+
+    </style>
+
 </resources>

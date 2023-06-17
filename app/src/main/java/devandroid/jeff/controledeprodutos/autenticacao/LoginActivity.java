@@ -17,6 +17,7 @@ import devandroid.jeff.controledeprodutos.view.MainActivity;
 public class LoginActivity extends AppCompatActivity {
 
     private TextView tv_login_conta;
+    private TextView tv_login_recuperar;
     private EditText et_login_email;
     private EditText et_login_senha;
     private ProgressBar progressBar;
@@ -69,10 +70,15 @@ public class LoginActivity extends AppCompatActivity {
         tv_login_conta.setOnClickListener(view -> {
             startActivity(new Intent(this, CriarContaActivity.class));
         });
+
+        tv_login_recuperar.setOnClickListener(view -> {
+            startActivity(new Intent(this, RecuperarContaActivity.class));
+        });
     }
 
     private void iniciaComponentes() {
         tv_login_conta = findViewById(R.id.tv_login_conta);
+        tv_login_recuperar = findViewById(R.id.tv_login_recuperar);
         et_login_email = findViewById(R.id.et_login_email);
         et_login_senha = findViewById(R.id.et_login_senha);
         progressBar = findViewById(R.id.progressBar);

@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import devandroid.jeff.controledeprodutos.R;
-import devandroid.jeff.controledeprodutos.database.ProdutoDAO;
 import devandroid.jeff.controledeprodutos.model.Produto;
 
 public class FormProdutoActivity extends AppCompatActivity {
@@ -17,7 +15,6 @@ public class FormProdutoActivity extends AppCompatActivity {
     private EditText edit_quantidade;
     private EditText edit_valor;
     private Button btn_salvar;
-    private ProdutoDAO produtoDAO;
 
     private Produto produto;
 
@@ -25,8 +22,6 @@ public class FormProdutoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_produto);
-
-        produtoDAO = new ProdutoDAO(this);
 
         edit_produto = this.findViewById(R.id.edit_produto);
         edit_quantidade = this.findViewById(R.id.edit_quantidade);
@@ -72,11 +67,8 @@ public class FormProdutoActivity extends AppCompatActivity {
                             produto.setEstoque(qtd);
                             produto.setValor(valorProduto);
 
-                            if(produto.getId() != 0){
-                                produtoDAO.atualizaProduto(produto);
-                            }else {
-                                produtoDAO.salvarProduto(produto);
-                            }
+                            produto.salvarProduto();
+
                             finish();
 
 

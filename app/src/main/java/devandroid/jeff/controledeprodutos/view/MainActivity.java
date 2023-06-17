@@ -19,7 +19,6 @@ import java.util.List;
 
 import devandroid.jeff.controledeprodutos.autenticacao.LoginActivity;
 import devandroid.jeff.controledeprodutos.database.FirebaseHelper;
-import devandroid.jeff.controledeprodutos.database.ProdutoDAO;
 import devandroid.jeff.controledeprodutos.model.Produto;
 import devandroid.jeff.controledeprodutos.R;
 import devandroid.jeff.controledeprodutos.adapter.AdapterProduto;
@@ -31,16 +30,12 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
     private ImageButton imgBtn_add;
     private ImageButton imgBtn_ver_mais;
     private TextView tv_info;
-    private ProdutoDAO produtoDAO;
     private List<Produto> produtoList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        produtoDAO = new ProdutoDAO(this);
-        produtoList = produtoDAO.getListProdutos();
 
         iniciaComponentes();
         ouvinteCliques();
@@ -87,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
 
     private void configRecyclerView(){
         produtoList.clear();
-        produtoList = produtoDAO.getListProdutos();
 
         verificaQtdLista();
 
@@ -106,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
             public void onSwipedRight(int position) {
 
                 Produto produto = produtoList.get(position);
-                produtoDAO.deleteProduto(produto);
                 produtoList.remove(produto);
                 //regarrega o adapter sem o item removido
                 adapterProduto.notifyItemRemoved(position);

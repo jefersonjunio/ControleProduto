@@ -1,19 +1,36 @@
 package devandroid.jeff.controledeprodutos.model;
 
+import com.google.firebase.database.DatabaseReference;
+
 import java.io.Serializable;
+
+import devandroid.jeff.controledeprodutos.database.FirebaseHelper;
 
 public class Produto implements Serializable {
 
     private String nome;
     private int estoque;
     private double valor;
-    private int id;
+    private String id;
 
-    public int getId() {
+    public Produto() {
+        DatabaseReference reference = FirebaseHelper.getDatabaseReference();
+        this.setId(reference.push().getKey());
+    }
+    public void salvarProduto() {
+        DatabaseReference reference = FirebaseHelper.getDatabaseReference()
+                .child("produtos")
+                .child(FirebaseHelper.getIdFirebase())
+                .child(this.id);
+
+        reference.setValue(this);
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
